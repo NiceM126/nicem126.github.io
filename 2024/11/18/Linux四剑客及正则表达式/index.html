@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid-nierdemon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Nier Demon">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux四剑客及正则表达式正则表达式 基础正则（使用四剑客命令时无需加任何参数即可使用）  12345678910^    # 匹配以某一内容开头 如：&#x27;^grep&#x27;匹配所有以grep开头的行。    $    # 匹配以某一内容结尾 如：&#x27;grep$&#x27; 匹配所有以grep结尾的行。^$	 # 匹配空行。.    # 匹配任意单个字符 如：&#x27;gr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux四剑客及正则表达式">
+<meta property="og:url" content="https://nicem126.github.io/2024/11/18/Linux%E5%9B%9B%E5%89%91%E5%AE%A2%E5%8F%8A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Nier Demon">
+<meta property="og:description" content="Linux四剑客及正则表达式正则表达式 基础正则（使用四剑客命令时无需加任何参数即可使用）  12345678910^    # 匹配以某一内容开头 如：&#x27;^grep&#x27;匹配所有以grep开头的行。    $    # 匹配以某一内容结尾 如：&#x27;grep$&#x27; 匹配所有以grep结尾的行。^$	 # 匹配空行。.    # 匹配任意单个字符 如：&#x27;gr">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-18T12:22:49.000Z">
+<meta property="article:modified_time" content="2024-11-18T12:26:29.033Z">
+<meta property="article:author" content="Nier Demon">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Linux四剑客及正则表达式 - Nier Demon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nicem126.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"VRmfzrVi10XWibnlJUpR9xa8-gzGzoHsz","app_key":"nwtrisoMYMghSxqd9uNxcmu1","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Nier Demon</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpeg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux四剑客及正则表达式"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-18 20:22" pubdate>
+          2024年11月18日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux四剑客及正则表达式</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Linux四剑客及正则表达式"><a href="#Linux四剑客及正则表达式" class="headerlink" title="Linux四剑客及正则表达式"></a>Linux四剑客及正则表达式</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><ul>
+<li><strong>基础正则（使用四剑客命令时无需加任何参数即可使用）</strong></li>
+</ul>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs autoit">^    <span class="hljs-meta"># 匹配以某一内容开头 如：<span class="hljs-string">&#x27;^grep&#x27;</span>匹配所有以grep开头的行。    </span><br>$    <span class="hljs-meta"># 匹配以某一内容结尾 如：<span class="hljs-string">&#x27;grep$&#x27;</span> 匹配所有以grep结尾的行。</span><br>^$	 <span class="hljs-meta"># 匹配空行。</span><br>.    <span class="hljs-meta"># 匹配任意单个字符 如：<span class="hljs-string">&#x27;gr.p&#x27;</span>匹配gr后接一个任意字符，然后是p。    </span><br>*    <span class="hljs-meta"># 前一个字符出现0次及0次以上 如：<span class="hljs-string">&#x27;a*&#x27;</span>匹配所有有a的行。</span><br>.*   <span class="hljs-meta"># 表示文件中所有内容。</span><br>[]   <span class="hljs-meta"># 匹配一个指定范围内的字符，如<span class="hljs-string">&#x27;[Gg]rep&#x27;</span>匹配Grep和grep。</span><br>[^]  <span class="hljs-meta"># 匹配一个不在指定范围内的字符，如：<span class="hljs-string">&#x27;[^A-Z]rep&#x27;</span> 匹配不包含 A-Z 中的字母开头的行</span><br>	 注意：在[]中，除位置在第一个字符的^外，其余任何带含义的特殊符号都会被还原。<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>扩展正则</strong></p>
+<ul>
+<li>使用方法</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span>命令：<br>		<span class="hljs-keyword">grep</span> -E ……		或egrep ……<br>sed命令：<br>		sed -r ……<br>awk命令：<br>		awk -E ……<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>表达式</li>
+</ul>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs autoit">+		<span class="hljs-meta">#匹配前一个字符连续出现1次或1次以上 如：<span class="hljs-string">&#x27;a+&#x27;</span> 匹配字符a连续出现1次或多次的行。</span><br>		注：通常与[]配合使用，过滤连续的内容。<br>&#123;n,m&#125;	<span class="hljs-meta">#匹配前一个字符至少n次，最多m次,优先匹配后面的数字</span><br>		例：<span class="hljs-string">&#x27;[0-9]&#123;18&#125;&#x27;</span>	匹配连续的<span class="hljs-number">18</span>个数字<br>|		<span class="hljs-meta">#或者</span><br>		例：<span class="hljs-string">&#x27;^$|^#&#x27;</span>	匹配文件的空行或以井号开头的<br>()		<span class="hljs-meta">#表示一个整体；反向引用/后向引用</span><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>单词边界符</strong></p>
+</li>
+</ul>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">\b</span>    	<span class="hljs-comment"># 单词锁定符，如: &#x27;\bgrep\b&#x27;只匹配grep;&#x27;\b[0-9]&#123;18&#125;\b&#x27;只匹配连续的18位数字</span><br><span class="hljs-string">\&lt;</span>    	<span class="hljs-comment"># 锚定单词的开始，如:&#x27;\&lt;grep&#x27;匹配包含以grep开头的单词的行。    </span><br><span class="hljs-string">\&gt;</span>    	<span class="hljs-comment"># 锚定单词的结束，如&#x27;grep\&gt;&#x27;匹配包含以grep结尾的单词的行。</span><br><span class="hljs-string">\&lt;……\&gt;</span>	<span class="hljs-comment"># 相当于\b...\b</span><br><span class="hljs-string">\w</span>      <span class="hljs-comment"># 匹配文字和数字字符，也就是[A-Za-z0-9];</span><br><span class="hljs-string">\W</span>      <span class="hljs-comment"># \w的反置形式，匹配一个或多个非单词字符,相当于[^A-Za-z0-9]</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="四剑客"><a href="#四剑客" class="headerlink" title="四剑客"></a>四剑客</h3><h4 id="find-在指定目录下查找文件"><a href="#find-在指定目录下查找文件" class="headerlink" title="find 在指定目录下查找文件"></a>find 在指定目录下查找文件</h4><p><strong>语法形式</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">find <span class="hljs-selector-attr">[参数]</span> <span class="hljs-selector-attr">[选项]</span>					   #单条件查找<br>find <span class="hljs-selector-attr">[参数]</span> <span class="hljs-selector-attr">[选项]</span> <span class="hljs-selector-attr">[or/and]</span> <span class="hljs-selector-attr">[选项]</span>	  #多条件查找<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>or&#x2F;and</strong></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ldif"><span class="hljs-comment">#使用find命令可以多条件查找；</span><br><span class="hljs-literal">-</span>a			<span class="hljs-comment">#需要同时满足两个、多个条件时（and可以省略）；</span><br><span class="hljs-literal">-</span>o			<span class="hljs-comment">#只需满足其中之一条件时；</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>选项</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk">-type f<span class="hljs-regexp">/d/</span>l<span class="hljs-regexp">/b/</span>c				<span class="hljs-comment">#按照文件类型查找；</span><br>-name <span class="hljs-string">&quot;NAME&quot;</span>				<span class="hljs-comment">#按照文件名字查找；</span><br>-iname <span class="hljs-string">&quot;NAME&quot;</span>				<span class="hljs-comment">#按照文件名字查找（忽略大小写）；</span><br>-inum <span class="hljs-string">&quot;INUM&quot;</span>				<span class="hljs-comment">#按照文件iNode号查找；</span><br>-maxdepth n					<span class="hljs-comment">#按照深度等级查找（向下遍历）；</span><br>-size +n<span class="hljs-regexp">/-n/</span>n				<span class="hljs-comment">#按照文件大小查找；</span><br>-mtime +n<span class="hljs-regexp">/-n/</span>n				<span class="hljs-comment">#按照文件修改时间查找；当n=0，代表24小时内被修改过的文件；</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#查找/目录下文件名为dezyan.txt的文件(不区分大小写)</span><br>[root@Dezyan ~]# <span class="hljs-built_in">find</span> / -iname <span class="hljs-string">&quot;dezyan.txt&quot;</span><br>/proc/kcore<br><span class="hljs-comment">#查找/目录下文件大小大于1M的目录</span><br>[root@Dezyan ~]# <span class="hljs-built_in">find</span> / -size +1M -type d<br>注意：当一个目录大小大于1M，说明该目录中存在非常多的小文件<br><span class="hljs-comment">#查找/目录下的字符设备或块设备文件</span><br>[root@Dezyan ~]# <span class="hljs-built_in">find</span> / -type c -o -type b<br>或	<span class="hljs-built_in">find</span> / -type c,b<br><span class="hljs-comment">#以深度等级为1查找/目录下以.log结尾的文件</span><br>[root@Dezyan ~]# <span class="hljs-built_in">find</span> / -maxdepth 1 -name <span class="hljs-string">&quot;*.log&quot;</span> -type f<br><span class="hljs-comment">#查找24小时内被修改过的文件</span><br>[root@Dezyan ~]# <span class="hljs-built_in">find</span> ./ -mtime 0<br><br></code></pre></td></tr></table></figure>
+
+<h5 id="xargs-给其他命令传递参数的一个过滤器"><a href="#xargs-给其他命令传递参数的一个过滤器" class="headerlink" title="xargs 给其他命令传递参数的一个过滤器"></a>xargs 给其他命令传递参数的一个过滤器</h5><p>注意：在xargs后别名失效</p>
+<p><strong>语法形式</strong></p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">find …………	|<span class="hljs-string"> xargs [文件操作，命令]</span><br><span class="hljs-string">#可以理解为将</span>|<span class="hljs-string">前执行的结果甩到末尾，再执行</span>|<span class="hljs-string">后的命令</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p><strong>相关使用方法</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">-n1					 <span class="hljs-comment">#按照第一列方式输出内容</span><br><span class="hljs-built_in">ls</span> -l/cat			 <span class="hljs-comment">#查看找到的文件；</span><br><span class="hljs-built_in">rm</span> [选项]				<span class="hljs-comment">#将查找的文件删除；</span><br>-i <span class="hljs-built_in">cp</span>/mv &#123;&#125; [参数]	<span class="hljs-comment">#将查找到的文件复制/移动到[参数位置]；</span><br><span class="hljs-built_in">cp</span>/mv -t [参数]		<span class="hljs-comment">#将查找到的文件复制/移动到[参数位置]；</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta">#将/etc/下大于9M的文件复制到~目录下</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># find /etc/ -size +9M | xargs cp -t ~</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># ls ~ | grep <span class="hljs-string">&#x27;hwd&#x27;</span></span><br>hwdb.bin<br><span class="hljs-meta">#查找出所有大写的.TXT结尾的文件 然后打包成test.tar.gz</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># find ./ -name <span class="hljs-string">&quot;*.TXT&quot;</span>|xargs tar zcvf a.tar.gz</span><br><br></code></pre></td></tr></table></figure>
+
+<h5 id="exec-调用并执行指定的命令"><a href="#exec-调用并执行指定的命令" class="headerlink" title="exec 调用并执行指定的命令"></a>exec 调用并执行指定的命令</h5><p>注意：使用exec将多个文件压缩成一个压缩包是不可取的，因为按照exec的逻辑，是将前一命令的每一次执行结果依次放入{}，进行压缩时，会不断覆盖文件；</p>
+<p><strong>语法形式</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">find …………	-exec <span class="hljs-selector-attr">[命令]</span> &#123;&#125; <span class="hljs-selector-attr">[参数]</span> \;<br><br></code></pre></td></tr></table></figure>
+
+<p>注意：其中&#x3D;&#x3D;；&#x3D;&#x3D;为shell中命令的分隔符，可将多个命令同时执行：mkdir test;touch 1.txt。</p>
+<p><strong>相关使用方法</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> [选项] &#123;&#125; \;		<span class="hljs-comment">#将查找的文件删除；</span><br><span class="hljs-built_in">cp</span>/mv &#123;&#125; [参数] \;	<span class="hljs-comment">#将查找到的文件复制/移动到[参数位置]；</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#将/etc/下大于9M的文件复制到~目录下</span><br>[root@Dezyan ~]# find /etc/ -size +9M -<span class="hljs-built_in">exec</span>  <span class="hljs-built_in">cp</span> &#123;&#125; ~ \;<br><br></code></pre></td></tr></table></figure>
+
+<h5 id="使用-和"><a href="#使用-和" class="headerlink" title="使用``和$()"></a>使用``和$()</h5><p><strong>语法形式</strong></p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs prolog">[命令+选项] <span class="hljs-string">`find ……………`</span> <br>[命令+选项] <span class="hljs-string">`find ……………`</span> [参数]<br><br></code></pre></td></tr></table></figure>
+
+<p>$()效果与``相同</p>
+<p>注意：如果一段命令被添加上了``，那么在整体命令中，需要先执行``中的命令，类似于运算法则中的加减乘除先算（）。</p>
+<p><strong>相关使用方法</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span>/mv `find ……` [参数]<br><span class="hljs-built_in">ls</span>/rm……<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle">#将<span class="hljs-regexp">/etc/</span>下大于<span class="hljs-number">9</span>M的文件复制到~目录下<br>[root@Dezyan ~]# cp -a `<span class="hljs-keyword">find</span> <span class="hljs-regexp">/etc/</span> -<span class="hljs-keyword">size</span> +<span class="hljs-number">9</span>M` ~<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="grep-强大的文本搜索工具"><a href="#grep-强大的文本搜索工具" class="headerlink" title="grep 强大的文本搜索工具"></a>grep 强大的文本搜索工具</h4><p><strong>语法形式</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">grep <span class="hljs-comment">[选项]</span> &#x27;<span class="hljs-comment">[word]</span>&#x27; <span class="hljs-comment">[参数]</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>选项</strong></p>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ldif"><span class="hljs-literal">-</span>v				<span class="hljs-comment">#反转查找;</span><br><span class="hljs-literal">-</span>r				<span class="hljs-comment">#当指定要查找的是&lt;目录&gt;而非文件时，必须使用这项参数;</span><br><span class="hljs-literal">-</span>E				<span class="hljs-comment">#识别扩展正则进行过滤;等同于egrep；</span><br><span class="hljs-literal">-</span>o				<span class="hljs-comment">#展示匹配过程;</span><br><span class="hljs-literal">-</span>-----------------------------------------------------------<br><span class="hljs-literal">-</span>-color			<span class="hljs-comment">#对筛选出的WORD加颜色显示；建议设置永久别名；</span><br><span class="hljs-literal">-</span>i				<span class="hljs-comment">#搜索时不区分大小写；</span><br><span class="hljs-literal">-</span>n				<span class="hljs-comment">#搜索出的结果显示行号；</span><br><span class="hljs-literal">-</span>w   			<span class="hljs-comment">#过滤的内容两边必须是空格(类似于边界符)</span><br><span class="hljs-literal">-</span>c   			<span class="hljs-comment">#统计单词出现的次数;</span><br><span class="hljs-literal">-</span>A   			<span class="hljs-comment">#过滤到内容往下2行;</span><br><span class="hljs-literal">-</span>B   			<span class="hljs-comment">#过滤到内容往上2行;</span><br><span class="hljs-literal">-</span>C   			<span class="hljs-comment">#过滤到内容上下各2行;</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-comment">#在/etc/passwd文件中过滤出root的行</span><br>[root<span class="hljs-variable">@Dezyan</span> ~]<span class="hljs-comment"># grep &#x27;root&#x27; /etc/passwd</span><br><span class="hljs-symbol">root:</span><span class="hljs-symbol">x:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash</span><br><span class="hljs-symbol">operator:</span><span class="hljs-symbol">x:</span><span class="hljs-number">11</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:operator</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/sbin/nologin</span><br><span class="hljs-comment">#不区分大小写过滤出 /etc/ssh/sshd_config 文件中包含`port 22`的行并输出行号</span><br>[root<span class="hljs-variable">@Dezyan</span> ~]<span class="hljs-comment"># grep -i -n  &#x27;port 22&#x27;   /etc/ssh/sshd_config </span><br><span class="hljs-number">17</span><span class="hljs-symbol">:</span><span class="hljs-comment">#Port 22</span><br><span class="hljs-comment">#排除（取反）/etc/selinux/config文件中的#和注释</span><br>[root<span class="hljs-variable">@Dezyan</span> ~]<span class="hljs-comment"># grep -v &#x27;^#|^$&#x27;  /etc/ssh/sshd_config</span><br><span class="hljs-comment">#统计word.txt文件中shutdown单词的个数</span><br>[root<span class="hljs-variable">@Dezyan</span> ~]<span class="hljs-comment"># grep -c &#x27;shutdown&#x27; word.txt </span><br><span class="hljs-number">2</span><br><span class="hljs-comment">#显示文件word.txt中config的上下各两行</span><br>[root<span class="hljs-variable">@Dezyan</span> ~]<span class="hljs-comment">#  grep -C 2 &#x27;config&#x27; word.txt </span><br>test	测试			<br>server	服务			<br>configure	配置	config	conf	cfg<br>continue	继续			<br><span class="hljs-keyword">next</span>	下一个<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="sed-功能强大的流式文本编辑器"><a href="#sed-功能强大的流式文本编辑器" class="headerlink" title="sed 功能强大的流式文本编辑器"></a>sed 功能强大的流式文本编辑器</h4><ul>
+<li><strong>语法形式</strong></li>
+</ul>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">sed <span class="hljs-comment">[选项]</span> &#x27;<span class="hljs-comment">[模式]</span><span class="hljs-comment">[动作]</span>&#x27; <span class="hljs-comment">[参数]</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>选项</strong></li>
+</ul>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ldif"><span class="hljs-literal">-</span>n			<span class="hljs-comment">#取消内存空间默认输出；不添加时sed命令会默认输出文件所有内容及匹配到的内容；</span><br><span class="hljs-literal">-</span>r			<span class="hljs-comment">#使模式中的正则表达式支持扩展正则；</span><br><span class="hljs-literal">-</span>i			<span class="hljs-comment">#对源文件进行修改；不添加时不会修改；</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>模式</strong></li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">number</span>								<span class="hljs-comment">#按行查找，查找第n行</span><br><span class="hljs-built_in">number</span>或正则符号，<span class="hljs-built_in">number</span>或正则符号	  	 <span class="hljs-comment">#查找n到m行</span><br>/字符串或正则表达式/					  <span class="hljs-comment">#模糊查询，查询包含此字符串的行</span><br>/字符串/,/字符串/				 		<span class="hljs-comment">#匹配区间：查询两个字符串之间的内容（也可用正则）</span><br>n[动作];m[动作]						 <span class="hljs-comment">#指定第n行和第m行进行操作</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>动作</strong></li>
+</ul>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs clean">p						#输出打印过滤出的内容<br>d						#删除过滤出的内容<br>a	字符串		  		  #add 在……后追加xxx <br>i	字符串		  		  #insert 在……前插入xxx<br>c	字符串		  		  #replace 将……替换为xxx<br>w	文件				   #将过滤到的内容写入到文件中<br>--------------------------------------------------<br>s###g					#<span class="hljs-number">1.</span>其中，g代表全局替换<br>						#<span class="hljs-number">2.</span>s<span class="hljs-comment">///g、s@@@g等与s###g效果相同	</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>动作中有p，模式中必有n</p>
+</li>
+<li><p>在使用匹配区间（ &#x2F;开头字符串&#x2F;,&#x2F;结尾字符串&#x2F; ）时，尽量<strong>使用文件内容中唯一的、不重复的字符串</strong>；</p>
+<ul>
+<li>若只有一个开头，有两个甚至多个结尾时：输出的内容只会是<strong>开头到第一个结尾字符串之间的内容</strong>；</li>
+<li>若只有开头，结尾字符串没有：输出的内容为<strong>开头字符串到文件末尾</strong>；</li>
+</ul>
+</li>
+<li><p><strong>sed的后向引用</strong></p>
+</li>
+</ul>
+<figure class="highlight leaf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs leaf">sed &#x27;s<span class="hljs-punctuation">#</span><span class="hljs-params">(正则)</span>(数字)(字符串)<span class="hljs-punctuation">#</span>\1\3<span class="hljs-punctuation">#</span><span class="hljs-keyword">g</span>&#x27; 		<span class="hljs-punctuation">#</span>\n获取第n个()中的内容<br><br></code></pre></td></tr></table></figure>
+
+<p> <strong>实例</strong></p>
+<figure class="highlight leaf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs leaf"><span class="hljs-punctuation">#</span>获取IP地址<br>[root@Dezyan ~]<span class="hljs-punctuation">#</span> ip add show ens33 | sed -rn &#x27;3s<span class="hljs-punctuation">#</span>.*et (.*)/24 .*$<span class="hljs-punctuation">#</span>\1<span class="hljs-punctuation">#</span><span class="hljs-keyword">gp</span>&#x27;<br>10.0.0.101<br><br><span class="hljs-punctuation">#</span>批量创建用户test01..test03<br>[root@Dezyan ~]<span class="hljs-punctuation">#</span> echo test&#123;01..03&#125; | xargs -n1 | sed -r &#x27;s<span class="hljs-punctuation">#</span><span class="hljs-params">(.<span class="hljs-operator">*</span>)</span><span class="hljs-punctuation">#</span><span class="hljs-keyword">useradd</span> \1<span class="hljs-punctuation">#</span><span class="hljs-keyword">g</span>&#x27; | bash<br><br><span class="hljs-punctuation">##</span>批量创建用户test01..test03并设置密码为dingzhiyan1016<br>echo test&#123;01..03&#125; | xargs -n1 | sed -r &#x27;s<span class="hljs-punctuation">#</span><span class="hljs-params">(.<span class="hljs-operator">*</span>)</span><span class="hljs-punctuation">#</span><span class="hljs-keyword">useradd</span> \1 ; echo dingzhiyan1016 | passwd --stdin \1<span class="hljs-punctuation">#</span><span class="hljs-keyword">g</span>&#x27; | bash<br>或<br>[root@Dezyan ~]<span class="hljs-punctuation">#</span> echo test11&#123;01..03&#125; | xargs -n1 | sed -r &#x27;s<span class="hljs-punctuation">#</span><span class="hljs-params">(.<span class="hljs-operator">*</span>)</span><span class="hljs-punctuation">#</span><span class="hljs-keyword">useradd</span> \1 ; echo \1:dingzhiyan1016 | chpasswd <span class="hljs-punctuation">#</span><span class="hljs-keyword">g</span>&#x27;  | bash<br><br><span class="hljs-punctuation">#</span>批量删除用户<br>[root@Dezyan ~]<span class="hljs-punctuation">#</span> echo user&#123;1..20&#125; | xargs -n1 | sed -r &#x27;s<span class="hljs-punctuation">#</span><span class="hljs-params">(.<span class="hljs-operator">*</span>)</span><span class="hljs-punctuation">#</span><span class="hljs-keyword">userdel</span> -r \1<span class="hljs-punctuation">#</span><span class="hljs-keyword">g</span>&#x27; | bash<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>示例</strong></li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-number">1</span>.<span class="hljs-keyword">a</span>.txt文件<br>[root@Dezyan ~]# <span class="hljs-keyword">cat</span> -n <span class="hljs-keyword">a</span>.txt <br>     <span class="hljs-number">1</span>	The <span class="hljs-keyword">first</span> snow came. <br>     <span class="hljs-number">2</span>	How beautiful it was, falling <span class="hljs-keyword">so</span> silently <span class="hljs-keyword">all</span> day long,<br>     <span class="hljs-number">3</span>	<span class="hljs-keyword">all</span> night long.<br>     <span class="hljs-number">4</span>	<span class="hljs-keyword">on</span> the mountains, <span class="hljs-keyword">on</span> the meadows, <br>     <span class="hljs-number">5</span>	<span class="hljs-keyword">on</span> the roofs of the living, <span class="hljs-keyword">on</span> the graves of the dead! A<br>     <br><span class="hljs-number">2</span>.查看<span class="hljs-keyword">a</span>.txt文件第三行的内容<br>[root@Dezyan ~]# sed -n <span class="hljs-string">&#x27;3p&#x27;</span> <span class="hljs-keyword">a</span>.txt <br><span class="hljs-keyword">all</span> night long.<br><br><span class="hljs-number">3</span>.查看<span class="hljs-keyword">a</span>.txt文件中第三行到结尾的内容<br>[root@Dezyan ~]#  sed -n <span class="hljs-string">&#x27;3,$p&#x27;</span> <span class="hljs-keyword">a</span>.txt <br><span class="hljs-keyword">all</span> night long.<br><span class="hljs-keyword">on</span> the mountains, <span class="hljs-keyword">on</span> the meadows, <br><span class="hljs-keyword">on</span> the roofs of the living, <span class="hljs-keyword">on</span> the graves of the dead! A<br><br><span class="hljs-number">4</span>.查看<span class="hljs-keyword">a</span>.txt中以<span class="hljs-keyword">o</span>开头或以T开头的行<br>[root@Dezyan ~]# sed -rn <span class="hljs-string">&#x27;/^o|^T/p&#x27;</span> <span class="hljs-keyword">a</span>.txt <br>The <span class="hljs-keyword">first</span> snow came. <br><span class="hljs-keyword">on</span> the mountains, <span class="hljs-keyword">on</span> the meadows, <br><span class="hljs-keyword">on</span> the roofs of the living, <span class="hljs-keyword">on</span> the graves of the dead! A<br><br><span class="hljs-number">5</span>.查看<span class="hljs-keyword">a</span>.txt文件中包含<span class="hljs-keyword">so</span>与meadows行之间的内容<br>[root@Dezyan ~]# sed -n <span class="hljs-string">&#x27;/so/,/meadows/p&#x27;</span> <span class="hljs-keyword">a</span>.txt <br>How beautiful it was, falling <span class="hljs-keyword">so</span> silently <span class="hljs-keyword">all</span> day long,<br><span class="hljs-keyword">all</span> night long.<br><span class="hljs-keyword">on</span> the mountains, <span class="hljs-keyword">on</span> the meadows,<br><br><span class="hljs-number">6</span>.在<span class="hljs-keyword">a</span>.txt文件<span class="hljs-number">1</span>到<span class="hljs-number">3</span>行后都添加一行Dezyan<br>[root@Dezyan ~]# sed <span class="hljs-string">&#x27;1,3i Dezyan&#x27;</span> <span class="hljs-keyword">a</span>.txt <br>Dezyan<br>The <span class="hljs-keyword">first</span> snow came. <br>Dezyan<br>How beautiful it was, falling <span class="hljs-keyword">so</span> silently <span class="hljs-keyword">all</span> day long,<br>Dezyan<br><span class="hljs-keyword">all</span> night long.<br><span class="hljs-keyword">on</span> the mountains, <span class="hljs-keyword">on</span> the meadows, <br><span class="hljs-keyword">on</span> the roofs of the living, <span class="hljs-keyword">on</span> the graves of the dead! A<br><br><span class="hljs-number">7</span>.将<span class="hljs-keyword">a</span>.txt文件中所有的（第一个）<span class="hljs-keyword">on</span>替换为under<br>[root@Dezyan ~]# sed <span class="hljs-string">&#x27;s#on#under#g&#x27;</span> <span class="hljs-keyword">a</span>.txt （只替换第一个只需将g去掉即可）<br>The <span class="hljs-keyword">first</span> snow came. <br>How beautiful it was, falling <span class="hljs-keyword">so</span> silently <span class="hljs-keyword">all</span> day lunderg,<br><span class="hljs-keyword">all</span> night lunderg.<br>under the mountains, under the meadows, <br>under the roofs of the living, under the graves of the dead! A<br><br><span class="hljs-number">8</span>.查找roofs所在行，并将其替换为<span class="hljs-built_in">floor</span>，并且只显示替换行<br>[root@Dezyan ~]# sed -n <span class="hljs-string">&#x27;/roofs/s#roofs#floor#gp&#x27;</span> <span class="hljs-keyword">a</span>.txt<br><span class="hljs-keyword">on</span> the <span class="hljs-built_in">floor</span> of the living, <span class="hljs-keyword">on</span> the graves of the dead! A<br><br><span class="hljs-number">9</span>.删除文件amount.txt中的所有字母<br>[root@Dezyan testdir]# sed -r <span class="hljs-string">&#x27;s#[a-Z]##g&#x27;</span> amount.txt<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="awk-文本和数据进行处理的编程语言"><a href="#awk-文本和数据进行处理的编程语言" class="headerlink" title="awk 文本和数据进行处理的编程语言"></a>awk 文本和数据进行处理的编程语言</h4><ul>
+<li><strong>语法形式</strong></li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">awk [选项] <span class="hljs-string">&#x27;哪一行&#123;print 哪一列&#125;&#x27;</span> [<span class="hljs-built_in">file</span>]<br><span class="hljs-comment">#逻辑：按行取列，先将符合条件的行尽数找出，再对其中的某一列进行选取；</span><br><span class="hljs-comment">#awk本质上其实是一种编程语言，其中可以进行运算；</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>选项</strong></li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-operator">-F</span> <span class="hljs-string">&quot;&quot;</span>			<span class="hljs-comment">#指定分隔符；</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>取行</strong></li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#当语法形式中的`&#123;print 哪一列&#125;`为空即为取行</span><br><span class="hljs-number">1</span>.指定某行或某几行<br>语法形式：<br>		awk <span class="hljs-string">&#x27;NR[运算符]n&#x27;</span> file<br>使用awk内置变量：<br>		NR  --&gt; 存储每行的行号<br>运算符：<br>		== 等于<br>		&gt;  大于<br>		&gt;= 大于等于<br>		&lt;  小于<br>		&lt;= 小于等于<br>		!= 不等于<br>		&amp;&amp; 且<br>		|| 或<br><span class="hljs-comment">#可使用内置函数取出文件内容的最后一行</span><br>		awk <span class="hljs-string">&#x27;END&#123;print&#125;&#x27;</span> file<br><span class="hljs-number">2</span>.模糊过滤取行<br>语法形式：<br>		awk <span class="hljs-string">&#x27;模式&#x27;</span> file<br>模式<span class="hljs-string">&#x27;可以使用正则符号&#x27;</span>：<br>		<span class="hljs-regexp">//</span>		<span class="hljs-comment">#模糊查找文件中的字符串</span><br>		<span class="hljs-regexp">//</span>,<span class="hljs-regexp">//</span>	<span class="hljs-comment">#模糊查找两字符串之间的内容</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>字符比对查取行</strong></li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs applescript">语法形式：<br>		awk [选项] &#x27;[取列内置变量] [模式匹配符] <span class="hljs-string">&quot;[表达式]&quot;</span>&#x27; <span class="hljs-built_in">file</span><br>模式匹配符：<br>		==		<span class="hljs-comment">#某列等于……</span><br>		!=		<span class="hljs-comment">#某列不等于……</span><br>		~		<span class="hljs-comment">#使用正则匹配字符串</span><br>		!~		<span class="hljs-comment">#使用正则匹配字符串并取反</span><br>表达式：<br>		任意字符<br>		正则表达式<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>数字比对查取行</strong></li>
+</ul>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs inform7">语法形式：<br>		awk <span class="hljs-comment">[选项]</span> &#x27;<span class="hljs-comment">[取列内置变量]</span> <span class="hljs-comment">[模式匹配符]</span><span class="hljs-comment">[运算符]</span>n&#x27; file<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>取列</strong></li>
+</ul>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment">#当语法形式中的`哪一行`为空即为取列</span><br>语法形式：<br>		awk <span class="hljs-string">&#x27;&#123;print [内置变量]&#125;&#x27;</span> <span class="hljs-keyword">file</span><br>awk内置变量：<br>		<span class="hljs-variable">$0</span>  	<span class="hljs-comment"># 表示整行</span><br>		<span class="hljs-variable">$n</span>  	<span class="hljs-comment"># 表示文件的第n列 </span><br>		,   	<span class="hljs-comment"># 逗号表示空格</span><br>		NF  	<span class="hljs-comment"># 表示每一行最后一列的列号</span><br>		<span class="hljs-variable">$NF</span>		<span class="hljs-comment"># 表示最后一列;`$(NF-1)`表示倒数倒数第二列 --&gt; 也体现了awk支持运算的特性</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>指定分隔符取列</strong></li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gams">语法形式：<br>		awk -F <span class="hljs-string">&quot;[表达式]&quot;</span> <span class="hljs-string">&#x27;&#123;print [内置变量]&#125;&#x27;</span> <span class="hljs-keyword">file</span><br>表达式：<br>		任意字符<br>		正则表达式<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>指定分隔符按行取列</strong></li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams">awk -F <span class="hljs-string">&quot;[表达式]&quot;</span> <span class="hljs-string">&#x27;取行方式+取列方式&#x27;</span> <span class="hljs-keyword">file</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>BEGIN的用法</strong></li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment">#BEGIN 是一个特殊的模式，它在处理任何输入行之前执行一次。</span><br>awk -F <span class="hljs-string">&quot;[表达式]&quot;</span> <span class="hljs-string">&#x27;BEGIN&#123;print 任意内容&#125;&#x27;</span> <span class="hljs-built_in">file</span><br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>示例</strong></li>
+</ul>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-meta">#过滤文件的选择：/etc/passwd文件的前10行，存储到了~/passwd.txt中</span><br><span class="hljs-meta">#即：head /etc/passwd &gt;&gt; ~/passwd.txt</span><br><span class="hljs-meta">#在未明确说明分隔符时，默认指定分隔符为<span class="hljs-string">&quot;:&quot;</span></span><br><span class="hljs-number">1.</span>指定取行<br><span class="hljs-meta">#取出文件最后一行 </span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk <span class="hljs-string">&#x27;END&#123;print&#125;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#取出第7行和第9行以及两行之间的内容</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk <span class="hljs-string">&#x27;NR&gt;=7&amp;&amp;NR&lt;=9&#x27;</span> passwd.txt</span><br><br><span class="hljs-number">2.</span>模糊取行<br><span class="hljs-meta">#取出文件中以root开头和以adm开头以及两行之间的内容</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk <span class="hljs-string">&#x27;/^root/,/^adm/&#x27;</span> passwd.txt</span><br><br><span class="hljs-number">3.</span>字符比对取行<br><span class="hljs-meta">#取出文件中用户名为root的行</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;$1==&quot;root&quot;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#取出文件中以nologin结尾的行</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;$NF~&quot;nologin$&quot;&#x27;</span> passwd.txt</span><br><br><span class="hljs-number">4.</span>数字比对取行<br><span class="hljs-meta">#取出用户uid大于6的行</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;$3&gt;6&#x27;</span> passwd.txt</span><br><br><span class="hljs-number">5.</span>取列<br><span class="hljs-meta">#输出文件每一行最后一列的序号（以:或\或:\为分隔符）</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F <span class="hljs-string">&quot;[:/]+&quot;</span> <span class="hljs-string">&#x27;&#123;print NF&#125;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#输出文件的第一列和最后一列（以:或\或:\为分隔符）</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F <span class="hljs-string">&quot;[:/]+&quot;</span> <span class="hljs-string">&#x27;&#123;print $1,$NF&#125;&#x27;</span> passwd.txt</span><br><br><span class="hljs-number">6.</span>BEGIN用法示例<br><span class="hljs-meta">#在输出文件第一列内容前，先输出“用户名”</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;BEGIN&#123;print &quot;用户名&quot;&#125;&#123;print $1&#125;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#让输出的第一列内容前，都有“用户名：”几个字</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;&#123;print &quot;用户名：&quot;  $1&#125;&#x27;</span> passwd.txt</span><br><br><span class="hljs-number">7.</span>综合运用<br><span class="hljs-meta">#输出文件最后一行的最后一列</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;END&#123;print $NF&#125;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#输出大于第5行到结尾的内容，并取出第3列</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;NR&gt;5&#123;print $3&#125;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#输出用户uid大于6的行并输出用户名</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;$3&gt;6&#123;print $1&#125;&#x27;</span> passwd.txt</span><br><span class="hljs-meta">#将系统重不能登录的用户输出到nologin.txt文件中，并在文件的开头显示“不能登录的用户有：”</span><br>	<span class="hljs-meta">##注：使用awk命令；不能使用管道符</span><br>[root<span class="hljs-symbol">@Dezyan</span> ~/testdir]<span class="hljs-meta"># awk -F: <span class="hljs-string">&#x27;BEGIN&#123;print &quot;不能登录的用户有：&quot;&#125; $NF~&quot;nologin$&quot;&#123;print $1&#125;&#x27;</span> /etc/passwd &gt;&gt; nologin.txt</span><br>不能登录的用户有：<br>bin<br>daemon<br>……………………<br><br><br><br></code></pre></td></tr></table></figure>
+
+<p>  本文转自 <a target="_blank" rel="noopener" href="https://blog.csdn.net/dingzy1/article/details/143837764?spm=1001.2014.3001.5506">https://blog.csdn.net/dingzy1/article/details/143837764?spm=1001.2014.3001.5506</a>，如有侵权，请联系删除。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E5%9F%BA%E7%A1%80/" class="category-chain-item">Linux基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux四剑客及正则表达式</div>
+      <div>https://nicem126.github.io/2024/11/18/Linux四剑客及正则表达式/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Nier Demon</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/18/Linux%E7%A3%81%E7%9B%98%E5%8F%8A%E5%88%86%E5%8C%BA/" title="Linux磁盘及分区">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux磁盘及分区</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/22/%E5%8D%8E%E4%B8%BA%E8%B7%AF%E7%94%B1%E5%99%A8NAT/" title="华为路由器NAT">
+                        <span class="hidden-mobile">华为路由器NAT</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"VRmfzrVi10XWibnlJUpR9xa8-gzGzoHsz","appKey":"nwtrisoMYMghSxqd9uNxcmu1","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
