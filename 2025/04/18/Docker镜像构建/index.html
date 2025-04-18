@@ -19,16 +19,16 @@
   <meta name="author" content="Nier Demon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、Docker镜像概念Docker 镜像是 Docker 容器运⾏时的只读模板，每⼀个镜像由⼀系列的层 (layers) 组成。Docker 使⽤ UnionFS 来将这些层联合到单独的镜像中。UnionFS 允许独⽴⽂件系统中的⽂件和⽂件夹(称之为分⽀) 被透明覆盖，形成⼀个单独连贯的⽂件系统。正因为有了这些层的存在，Docker 是如此的轻ᰁ。当你 改变了⼀个 Docker 镜像，⽐如升级到">
+    <meta name="description" content="一、Docker镜像概念Docker 镜像是 Docker 容器运行时的只读模板，每⼀个镜像由一系列的层 (layers) 组成。Docker 使用UnionFS 来将这些层联合到单独的镜像中。UnionFS 允许独⽴⽂件系统中的文件和文件夹(称之为分支)被透明覆盖，形成⼀个单独连贯的⽂件系统。正因为有了这些层的存在，Docker 是如此的轻量。当你改变了⼀个 Docker 镜像，比如升级到某个程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker镜像构建">
 <meta property="og:url" content="https://nicem126.github.io/2025/04/18/Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Nier Demon">
-<meta property="og:description" content="一、Docker镜像概念Docker 镜像是 Docker 容器运⾏时的只读模板，每⼀个镜像由⼀系列的层 (layers) 组成。Docker 使⽤ UnionFS 来将这些层联合到单独的镜像中。UnionFS 允许独⽴⽂件系统中的⽂件和⽂件夹(称之为分⽀) 被透明覆盖，形成⼀个单独连贯的⽂件系统。正因为有了这些层的存在，Docker 是如此的轻ᰁ。当你 改变了⼀个 Docker 镜像，⽐如升级到">
+<meta property="og:description" content="一、Docker镜像概念Docker 镜像是 Docker 容器运行时的只读模板，每⼀个镜像由一系列的层 (layers) 组成。Docker 使用UnionFS 来将这些层联合到单独的镜像中。UnionFS 允许独⽴⽂件系统中的文件和文件夹(称之为分支)被透明覆盖，形成⼀个单独连贯的⽂件系统。正因为有了这些层的存在，Docker 是如此的轻量。当你改变了⼀个 Docker 镜像，比如升级到某个程">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s11.ax1x.com/2020/09/24/wzZTdf.png">
 <meta property="article:published_time" content="2025-04-18T10:15:09.000Z">
-<meta property="article:modified_time" content="2025-04-18T10:21:29.326Z">
+<meta property="article:modified_time" content="2025-04-18T10:53:11.825Z">
 <meta property="article:author" content="Nier Demon">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -300,17 +300,7 @@
             
               <div class="markdown-body">
                 
-                <h3 id="一、Docker镜像概念"><a href="#一、Docker镜像概念" class="headerlink" title="一、Docker镜像概念"></a>一、Docker镜像概念</h3><p>Docker 镜像是 Docker 容器运⾏时的只读模板，每⼀个镜像由⼀系列的层 (layers) 组成。Docker 使⽤</p>
-<p>UnionFS 来将这些层联合到单独的镜像中。UnionFS 允许独⽴⽂件系统中的⽂件和⽂件夹(称之为分⽀)</p>
-<p>被透明覆盖，形成⼀个单独连贯的⽂件系统。正因为有了这些层的存在，Docker 是如此的轻ᰁ。当你</p>
-<p>改变了⼀个 Docker 镜像，⽐如升级到某个程序到新的版本，⼀个新的层会被创建。因此，不⽤替换整</p>
-<p>个原先的镜像或者᯿新建⽴(在使⽤虚拟机的时候你可能会这么做)，只是⼀个新的层被添加或升级了。</p>
-<p>现在你不⽤᯿新发布整个镜像，只需要升级，层使得分发 Docker 镜像变得简单和快速。</p>
-<p>在 Docker 的术语⾥，⼀个只读层被称为镜像，⼀个镜像是永久不会变的。</p>
-<p>由于 Docker 使⽤⼀个统⼀⽂件系统，Docker 进程认为整个⽂件系统是以读写⽅式挂载的。 但是所有</p>
-<p>的变更都发⽣顶层的可写层，⽽下层的原始的只读镜像⽂件并未变化。由于镜像不可写，所以镜像是⽆</p>
-<p>状态的。</p>
-<p>每⼀个镜像都可能依赖于由⼀个或多个下层的组成的另⼀个镜像。下层那个镜像是上层镜像的⽗镜像。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/wzZTdf"><img src="https://s11.ax1x.com/2020/09/24/wzZTdf.png" srcset="/img/loading.gif" lazyload alt="wzZTdf.png" style="zoom:80%;" /></a></p>
+                <h3 id="一、Docker镜像概念"><a href="#一、Docker镜像概念" class="headerlink" title="一、Docker镜像概念"></a>一、Docker镜像概念</h3><p>Docker 镜像是 Docker 容器运行时的只读模板，每⼀个镜像由一系列的层 (layers) 组成。Docker 使用UnionFS 来将这些层联合到单独的镜像中。UnionFS 允许独⽴⽂件系统中的文件和文件夹(称之为分支)被透明覆盖，形成⼀个单独连贯的⽂件系统。正因为有了这些层的存在，Docker 是如此的轻量。当你改变了⼀个 Docker 镜像，比如升级到某个程序到新的版本，一个新的层会被创建。因此，不用替换整个原先的镜像或者重新构建(在使用虚拟机的时候你可能会这么做)，只是⼀个新的层被添加或升级了。现在你不用重新发布整个镜像，只需要升级层，使得分发 Docker 镜像变得简单和快速。在 Docker 的术语里，⼀个只读层被称为镜像，⼀个镜像是永久不会变的。由于 Docker 使用⼀个统⼀文件系统，Docker 进程认为整个文件系统是以读写方式挂载的。 但是所有的变更都发生在顶层的可写层，而下层的原始的只读镜像⽂件并未变化。由于镜像不可写，所以镜像是无状态的。每⼀个镜像都可能依赖于由⼀个或多个下层的组成的另⼀个镜像。下层那个镜像是上层镜像的父镜像。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/wzZTdf"><img src="https://s11.ax1x.com/2020/09/24/wzZTdf.png" srcset="/img/loading.gif" lazyload alt="wzZTdf.png" style="zoom:80%;" /></a></p>
 <h3 id="二、Docker镜像的创建"><a href="#二、Docker镜像的创建" class="headerlink" title="二、Docker镜像的创建"></a>二、Docker镜像的创建</h3><h4 id="2-1-Docker镜像的创建方法"><a href="#2-1-Docker镜像的创建方法" class="headerlink" title="2.1 Docker镜像的创建方法"></a>2.1 Docker镜像的创建方法</h4><ol>
 <li><strong>基于已有镜像创建</strong></li>
 <li><strong>基于本地模板创建</strong></li>
@@ -510,6 +500,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/04/18/k8s%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" title="k8s基础教程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">k8s基础教程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
