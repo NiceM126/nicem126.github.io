@@ -19,19 +19,19 @@
   <meta name="author" content="Nier Demon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.网络拓扑图  配置    配置测试    2.路由器配置接口配置interface GigabitEthernet0&#x2F;0&#x2F;0 ip address 1.1.1.254 255.255.255.0#interface GigabitEthernet0&#x2F;0&#x2F;1 ip address 11.1.1.254 255.255.255.0#interface Gig">
+    <meta name="description" content="1.网络拓扑图  配置    配置测试  2.路由器配置接口配置interface GigabitEthernet0&#x2F;0&#x2F;0 ip address 1.1.1.254 255.255.255.0  interface GigabitEthernet0&#x2F;0&#x2F;1 ip address 11.1.1.254 255.255.255.0  interface Gig">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IPSecVPN配置实践">
 <meta property="og:url" content="https://nicem126.github.io/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Nier Demon">
-<meta property="og:description" content="1.网络拓扑图  配置    配置测试    2.路由器配置接口配置interface GigabitEthernet0&#x2F;0&#x2F;0 ip address 1.1.1.254 255.255.255.0#interface GigabitEthernet0&#x2F;0&#x2F;1 ip address 11.1.1.254 255.255.255.0#interface Gig">
+<meta property="og:description" content="1.网络拓扑图  配置    配置测试  2.路由器配置接口配置interface GigabitEthernet0&#x2F;0&#x2F;0 ip address 1.1.1.254 255.255.255.0  interface GigabitEthernet0&#x2F;0&#x2F;1 ip address 11.1.1.254 255.255.255.0  interface Gig">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://nicem126.github.io/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91.png">
 <meta property="og:image" content="https://nicem126.github.io/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE1.jpg">
 <meta property="og:image" content="https://nicem126.github.io/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE2.jpg">
 <meta property="og:image" content="https://nicem126.github.io/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE%E6%B5%8B%E8%AF%95.jpg">
 <meta property="article:published_time" content="2025-04-18T02:29:36.000Z">
-<meta property="article:modified_time" content="2025-04-18T03:39:11.452Z">
+<meta property="article:modified_time" content="2025-04-18T10:09:48.669Z">
 <meta property="article:author" content="Nier Demon">
 <meta property="article:tag" content="eNSP">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          472 字
+          463 字
         
       </span>
     
@@ -303,42 +303,45 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-网络拓扑图"><a href="#1-网络拓扑图" class="headerlink" title="1.网络拓扑图"></a>1.网络拓扑图</h2><img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91.png" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
+                <h3 id="1-网络拓扑图"><a href="#1-网络拓扑图" class="headerlink" title="1.网络拓扑图"></a>1.网络拓扑图</h3><img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91.png" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
 
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE1.jpg" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE1.jpg" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
 
 <img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE2.jpg" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
 
-<h3 id="配置测试"><a href="#配置测试" class="headerlink" title="配置测试"></a>配置测试</h3><img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE%E6%B5%8B%E8%AF%95.jpg" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
+<h4 id="配置测试"><a href="#配置测试" class="headerlink" title="配置测试"></a>配置测试</h4><img src="/2025/04/18/IPSecVPN%E9%85%8D%E7%BD%AE%E5%AE%9E%E8%B7%B5/%E9%85%8D%E7%BD%AE%E6%B5%8B%E8%AF%95.jpg" srcset="/img/loading.gif" lazyload class="" title="IPSecVPN配置实践">
 
-
-
-<h2 id="2-路由器配置"><a href="#2-路由器配置" class="headerlink" title="2.路由器配置"></a>2.路由器配置</h2><h3 id="接口配置"><a href="#接口配置" class="headerlink" title="接口配置"></a>接口配置</h3><h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>interface GigabitEthernet0&#x2F;0&#x2F;0<br> ip address 1.1.1.254 255.255.255.0<br>#<br>interface GigabitEthernet0&#x2F;0&#x2F;1<br> ip address 11.1.1.254 255.255.255.0<br>#<br>interface GigabitEthernet0&#x2F;0&#x2F;2<br> ip address 13.1.1.254 255.255.255.0<br>#</p>
-<h2 id="3-网络拓扑图"><a href="#3-网络拓扑图" class="headerlink" title="3.网络拓扑图"></a>3.网络拓扑图</h2><h3 id="3-1-FW1参考配置"><a href="#3-1-FW1参考配置" class="headerlink" title="3.1 FW1参考配置"></a>3.1 FW1参考配置</h3><h4 id="acl配置"><a href="#acl配置" class="headerlink" title="acl配置"></a>acl配置</h4><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><p>acl number 3000<br> rule 5 permit ip source 192.168.10.0 0.0.0.255 destination 192.168.20.0 0.0.0.255</p>
-<h4 id="ipsec安全提议"><a href="#ipsec安全提议" class="headerlink" title="ipsec安全提议"></a>ipsec安全提议</h4><h1 id="-2"><a href="#-2" class="headerlink" title=""></a></h1><p>ipsec proposal tran1<br> esp authentication-algorithm sha2-256<br> esp encryption-algorithm aes-256</p>
-<h4 id="默认ike安全提议"><a href="#默认ike安全提议" class="headerlink" title="默认ike安全提议"></a>默认ike安全提议</h4><h1 id="-3"><a href="#-3" class="headerlink" title=""></a></h1><p>ike proposal default<br> encryption-algorithm aes-256 aes-192 aes-128<br> dh group14<br> authentication-algorithm sha2-512 sha2-384 sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
-<h4 id="ike安全提议"><a href="#ike安全提议" class="headerlink" title="ike安全提议"></a>ike安全提议</h4><p>ike proposal 10<br> encryption-algorithm aes-256<br> dh group14<br> authentication-algorithm sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
-<h4 id="ike对等体"><a href="#ike对等体" class="headerlink" title="ike对等体"></a>ike对等体</h4><h1 id="-4"><a href="#-4" class="headerlink" title=""></a></h1><p>ike peer b<br> pre-shared-key Welcome@123<br> ike-proposal 10<br> remote-address 11.1.1.2</p>
-<h4 id="ipsec安全策略"><a href="#ipsec安全策略" class="headerlink" title="ipsec安全策略"></a>ipsec安全策略</h4><h1 id="-5"><a href="#-5" class="headerlink" title=""></a></h1><p>ipsec policy FW1 10 isakmp<br> security acl 3000<br> ike-peer b<br> proposal tran1</p>
-<h4 id="接口配置-1"><a href="#接口配置-1" class="headerlink" title="接口配置"></a>接口配置</h4><h1 id="-6"><a href="#-6" class="headerlink" title=""></a></h1><p>interface GigabitEthernet1&#x2F;0&#x2F;0<br> undo shutdown<br> ip address 1.1.1.1 255.255.255.0<br> ipsec policy FW1</p>
-<h1 id="-7"><a href="#-7" class="headerlink" title=""></a></h1><p>interface GigabitEthernet1&#x2F;0&#x2F;1<br> undo shutdown<br> ip address 192.168.10.1 255.255.255.0</p>
-<h4 id="区域配置"><a href="#区域配置" class="headerlink" title="区域配置"></a>区域配置</h4><h1 id="-8"><a href="#-8" class="headerlink" title=""></a></h1><p>firewall zone local<br> set priority 100</p>
-<h1 id="-9"><a href="#-9" class="headerlink" title=""></a></h1><p>firewall zone trust<br> set priority 85<br> add interface GigabitEthernet0&#x2F;0&#x2F;0<br> add interface GigabitEthernet1&#x2F;0&#x2F;1</p>
-<h1 id="-10"><a href="#-10" class="headerlink" title=""></a></h1><p>firewall zone untrust<br> set priority 5<br> add interface GigabitEthernet1&#x2F;0&#x2F;0</p>
-<h4 id="静态路由"><a href="#静态路由" class="headerlink" title="静态路由"></a>静态路由</h4><h1 id="-11"><a href="#-11" class="headerlink" title=""></a></h1><p>ip route-static 0.0.0.0 0.0.0.0 1.1.1.254</p>
-<h1 id="-12"><a href="#-12" class="headerlink" title=""></a></h1><h4 id="IPSecVPN安全策略"><a href="#IPSecVPN安全策略" class="headerlink" title="IPSecVPN安全策略"></a>IPSecVPN安全策略</h4><p>security-policy<br> rule name vpn-ike<br>  source-zone local<br>  source-zone untrust<br>  destination-zone local<br>  destination-zone untrust<br>  source-address 1.1.1.1 mask 255.255.255.255<br>  source-address 11.1.1.2 mask 255.255.255.255<br>  destination-address 1.1.1.1 mask 255.255.255.255<br>  destination-address 11.1.1.2 mask 255.255.255.255<br>  action permit<br> rule name vpn-tranffic<br>  source-zone trust<br>  source-zone untrust<br>  destination-zone trust<br>  destination-zone untrust<br>  source-address 192.168.10.0 0.0.0.255<br>  source-address 192.168.20.0 0.0.0.255<br>  destination-address 192.168.10.0 0.0.0.255<br>  destination-address 192.168.20.0 0.0.0.255<br>  action permit<br>#</p>
-<h4 id="启用IPSec安全策略"><a href="#启用IPSec安全策略" class="headerlink" title="启用IPSec安全策略"></a>启用IPSec安全策略</h4><p>[FW1-GigabitEthernet1&#x2F;0&#x2F;0]ipsec policy FW1</p>
-<h3 id="3-2-FW2参考配置"><a href="#3-2-FW2参考配置" class="headerlink" title="3.2 FW2参考配置"></a>3.2 FW2参考配置</h3><h4 id="acl配置-1"><a href="#acl配置-1" class="headerlink" title="acl配置"></a>acl配置</h4><h1 id="-13"><a href="#-13" class="headerlink" title=""></a></h1><p>acl number 3000<br> rule 5 permit ip source 192.168.20.0 0.0.0.255 destination 192.168.10.0 0.0.0.255</p>
-<h1 id="-14"><a href="#-14" class="headerlink" title=""></a></h1><p>ipsec proposal tran1<br> esp authentication-algorithm sha2-256<br> esp encryption-algorithm aes-256</p>
-<h1 id="-15"><a href="#-15" class="headerlink" title=""></a></h1><p>ike proposal default<br> encryption-algorithm aes-256 aes-192 aes-128<br> dh group14<br> authentication-algorithm sha2-512 sha2-384 sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
+<h3 id="2-路由器配置"><a href="#2-路由器配置" class="headerlink" title="2.路由器配置"></a>2.路由器配置</h3><h4 id="接口配置"><a href="#接口配置" class="headerlink" title="接口配置"></a>接口配置</h4><p>interface GigabitEthernet0&#x2F;0&#x2F;0<br> ip address 1.1.1.254 255.255.255.0 </p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1<br> ip address 11.1.1.254 255.255.255.0 </p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;2<br> ip address 13.1.1.254 255.255.255.0 </p>
+<h3 id="3-网络拓扑图"><a href="#3-网络拓扑图" class="headerlink" title="3.网络拓扑图"></a>3.网络拓扑图</h3><h4 id="3-1-FW1参考配置"><a href="#3-1-FW1参考配置" class="headerlink" title="3.1 FW1参考配置"></a>3.1 FW1参考配置</h4><h5 id="acl配置"><a href="#acl配置" class="headerlink" title="acl配置"></a>acl配置</h5><p>acl number 3000<br> rule 5 permit ip source 192.168.10.0 0.0.0.255 destination 192.168.20.0 0.0.0.255</p>
+<h5 id="ipsec安全提议"><a href="#ipsec安全提议" class="headerlink" title="ipsec安全提议"></a>ipsec安全提议</h5><p>ipsec proposal tran1<br> esp authentication-algorithm sha2-256<br> esp encryption-algorithm aes-256</p>
+<h5 id="默认ike安全提议"><a href="#默认ike安全提议" class="headerlink" title="默认ike安全提议"></a>默认ike安全提议</h5><p>ike proposal default<br> encryption-algorithm aes-256 aes-192 aes-128<br> dh group14<br> authentication-algorithm sha2-512 sha2-384 sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
+<h5 id="ike安全提议"><a href="#ike安全提议" class="headerlink" title="ike安全提议"></a>ike安全提议</h5><p>ike proposal 10<br> encryption-algorithm aes-256<br> dh group14<br> authentication-algorithm sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
+<h5 id="ike对等体"><a href="#ike对等体" class="headerlink" title="ike对等体"></a>ike对等体</h5><p>ike peer b<br> pre-shared-key Welcome@123<br> ike-proposal 10<br> remote-address 11.1.1.2</p>
+<h5 id="ipsec安全策略"><a href="#ipsec安全策略" class="headerlink" title="ipsec安全策略"></a>ipsec安全策略</h5><p>ipsec policy FW1 10 isakmp<br> security acl 3000<br> ike-peer b<br> proposal tran1</p>
+<h5 id="接口配置-1"><a href="#接口配置-1" class="headerlink" title="接口配置"></a>接口配置</h5><p>interface GigabitEthernet1&#x2F;0&#x2F;0<br> undo shutdown<br> ip address 1.1.1.1 255.255.255.0<br> ipsec policy FW1</p>
+<p>interface GigabitEthernet1&#x2F;0&#x2F;1<br> undo shutdown<br> ip address 192.168.10.1 255.255.255.0</p>
+<h5 id="区域配置"><a href="#区域配置" class="headerlink" title="区域配置"></a>区域配置</h5><p>firewall zone local<br> set priority 100</p>
+<p>firewall zone trust<br> set priority 85<br> add interface GigabitEthernet0&#x2F;0&#x2F;0<br> add interface GigabitEthernet1&#x2F;0&#x2F;1</p>
+<p>firewall zone untrust<br> set priority 5<br> add interface GigabitEthernet1&#x2F;0&#x2F;0</p>
+<h5 id="静态路由"><a href="#静态路由" class="headerlink" title="静态路由"></a>静态路由</h5><p>ip route-static 0.0.0.0 0.0.0.0 1.1.1.254</p>
+<h5 id="IPSecVPN安全策略"><a href="#IPSecVPN安全策略" class="headerlink" title="IPSecVPN安全策略"></a>IPSecVPN安全策略</h5><p>security-policy<br> rule name vpn-ike<br>  source-zone local<br>  source-zone untrust<br>  destination-zone local<br>  destination-zone untrust<br>  source-address 1.1.1.1 mask 255.255.255.255<br>  source-address 11.1.1.2 mask 255.255.255.255<br>  destination-address 1.1.1.1 mask 255.255.255.255<br>  destination-address 11.1.1.2 mask 255.255.255.255<br>  action permit<br> rule name vpn-tranffic<br>  source-zone trust<br>  source-zone untrust<br>  destination-zone trust<br>  destination-zone untrust<br>  source-address 192.168.10.0 0.0.0.255<br>  source-address 192.168.20.0 0.0.0.255<br>  destination-address 192.168.10.0 0.0.0.255<br>  destination-address 192.168.20.0 0.0.0.255<br>  action permit</p>
+<h5 id="启用IPSec安全策略"><a href="#启用IPSec安全策略" class="headerlink" title="启用IPSec安全策略"></a>启用IPSec安全策略</h5><p>[FW1-GigabitEthernet1&#x2F;0&#x2F;0]ipsec policy FW1</p>
+<h4 id="3-2-FW2参考配置"><a href="#3-2-FW2参考配置" class="headerlink" title="3.2 FW2参考配置"></a>3.2 FW2参考配置</h4><h5 id="acl配置-1"><a href="#acl配置-1" class="headerlink" title="acl配置"></a>acl配置</h5><p>acl number 3000<br> rule 5 permit ip source 192.168.20.0 0.0.0.255 destination 192.168.10.0 0.0.0.255</p>
+<p>ipsec proposal tran1<br> esp authentication-algorithm sha2-256<br> esp encryption-algorithm aes-256</p>
+<p>ike proposal default<br> encryption-algorithm aes-256 aes-192 aes-128<br> dh group14<br> authentication-algorithm sha2-512 sha2-384 sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
 <p>ike proposal 10<br> encryption-algorithm aes-256<br> dh group14<br> authentication-algorithm sha2-256<br> authentication-method pre-share<br> integrity-algorithm hmac-sha2-256<br> prf hmac-sha2-256</p>
-<h4 id="ike对等体-1"><a href="#ike对等体-1" class="headerlink" title="ike对等体"></a>ike对等体</h4><h1 id="-16"><a href="#-16" class="headerlink" title=""></a></h1><p>ike peer a<br> pre-shared-key Welcome@123<br> ike-proposal 10<br> remote-address 1.1.1.1</p>
-<h4 id="ipsec安全策略-1"><a href="#ipsec安全策略-1" class="headerlink" title="ipsec安全策略"></a>ipsec安全策略</h4><h1 id="-17"><a href="#-17" class="headerlink" title=""></a></h1><p>ipsec policy FW2 10 isakmp<br> security acl 3000<br> ike-peer a<br> proposal tran1</p>
-<h1 id="-18"><a href="#-18" class="headerlink" title=""></a></h1><p>interface GigabitEthernet1&#x2F;0&#x2F;0<br> undo shutdown<br> ip address 11.1.1.2 255.255.255.0<br> ipsec policy FW2<br>#<br>interface GigabitEthernet1&#x2F;0&#x2F;1<br> undo shutdown<br> ip address 192.168.20.2 255.255.255.0<br>#</p>
-<p>firewall zone local<br> set priority 100<br>#<br>firewall zone trust<br> set priority 85<br> add interface GigabitEthernet0&#x2F;0&#x2F;0<br> add interface GigabitEthernet1&#x2F;0&#x2F;1<br>#<br>firewall zone untrust<br> set priority 5<br> add interface GigabitEthernet1&#x2F;0&#x2F;0</p>
-<h1 id="-19"><a href="#-19" class="headerlink" title=""></a></h1><p>ip route-static 0.0.0.0 0.0.0.0 11.1.1.254</p>
-<h1 id="-20"><a href="#-20" class="headerlink" title=""></a></h1><p>security-policy<br> rule name vpn-ike<br>  source-zone local<br>  source-zone untrust<br>  destination-zone local<br>  destination-zone untrust<br>  source-address 1.1.1.1 mask 255.255.255.255<br>  source-address 11.1.1.2 mask 255.255.255.255<br>  destination-address 1.1.1.1 mask 255.255.255.255<br>  destination-address 11.1.1.2 mask 255.255.255.255<br>  action permit<br> rule name vpn-tranffic<br>  source-zone trust<br>  source-zone untrust<br>  destination-zone trust<br>  destination-zone untrust<br>  source-address 192.168.10.0 0.0.0.255<br>  source-address 192.168.20.0 0.0.0.255<br>  destination-address 192.168.10.0 0.0.0.255<br>  destination-address 192.168.20.0 0.0.0.255<br>  action permit<br>#</p>
-<h4 id="启用IPSec安全策略-1"><a href="#启用IPSec安全策略-1" class="headerlink" title="启用IPSec安全策略"></a>启用IPSec安全策略</h4><p>[FW2-GigabitEthernet1&#x2F;0&#x2F;0]ipsec policy FW2</p>
+<h5 id="ike对等体-1"><a href="#ike对等体-1" class="headerlink" title="ike对等体"></a>ike对等体</h5><p>ike peer a<br> pre-shared-key Welcome@123<br> ike-proposal 10<br> remote-address 1.1.1.1</p>
+<h5 id="ipsec安全策略-1"><a href="#ipsec安全策略-1" class="headerlink" title="ipsec安全策略"></a>ipsec安全策略</h5><p>ipsec policy FW2 10 isakmp<br> security acl 3000<br> ike-peer a<br> proposal tran1</p>
+<p>interface GigabitEthernet1&#x2F;0&#x2F;0<br> undo shutdown<br> ip address 11.1.1.2 255.255.255.0<br> ipsec policy FW2</p>
+<p>interface GigabitEthernet1&#x2F;0&#x2F;1<br> undo shutdown<br> ip address 192.168.20.2 255.255.255.0</p>
+<p>firewall zone local<br> set priority 100</p>
+<p>firewall zone trust<br> set priority 85<br> add interface GigabitEthernet0&#x2F;0&#x2F;0<br> add interface GigabitEthernet1&#x2F;0&#x2F;1</p>
+<p>firewall zone untrust<br> set priority 5<br> add interface GigabitEthernet1&#x2F;0&#x2F;0</p>
+<p>ip route-static 0.0.0.0 0.0.0.0 11.1.1.254</p>
+<p>security-policy<br> rule name vpn-ike<br>  source-zone local<br>  source-zone untrust<br>  destination-zone local<br>  destination-zone untrust<br>  source-address 1.1.1.1 mask 255.255.255.255<br>  source-address 11.1.1.2 mask 255.255.255.255<br>  destination-address 1.1.1.1 mask 255.255.255.255<br>  destination-address 11.1.1.2 mask 255.255.255.255<br>  action permit<br> rule name vpn-tranffic<br>  source-zone trust<br>  source-zone untrust<br>  destination-zone trust<br>  destination-zone untrust<br>  source-address 192.168.10.0 0.0.0.255<br>  source-address 192.168.20.0 0.0.0.255<br>  destination-address 192.168.10.0 0.0.0.255<br>  destination-address 192.168.20.0 0.0.0.255<br>  action permit</p>
+<h5 id="启用IPSec安全策略-1"><a href="#启用IPSec安全策略-1" class="headerlink" title="启用IPSec安全策略"></a>启用IPSec安全策略</h5><p>[FW2-GigabitEthernet1&#x2F;0&#x2F;0]ipsec policy FW2</p>
 
                 
               </div>
