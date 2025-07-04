@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid-nierdemon.png">
+  <link rel="icon" href="/img/fluid-nierdemon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Nier Demon">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="sed 编辑器sed 是一种流编辑器（Stream Editor），用于对文本文件进行行级别的处理。与 vim 不同，sed 处理时不直接编辑文件，而是将文件的每一行读取到临时缓冲区中（称为“模式空间”或 pattern space），在该缓冲区中执行编辑命令，最后将处理结果输出到屏幕或指定的文件。 工作过程sed 的工作流程包括以下三个主要步骤：  读取：sed 从输入流（文件、管道、标准输入）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell编程之sed文本编辑">
+<meta property="og:url" content="https://nicem126.github.io/2025/07/04/shell%E7%BC%96%E7%A8%8B%E4%B9%8Bsed%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91/index.html">
+<meta property="og:site_name" content="Nier Demon">
+<meta property="og:description" content="sed 编辑器sed 是一种流编辑器（Stream Editor），用于对文本文件进行行级别的处理。与 vim 不同，sed 处理时不直接编辑文件，而是将文件的每一行读取到临时缓冲区中（称为“模式空间”或 pattern space），在该缓冲区中执行编辑命令，最后将处理结果输出到屏幕或指定的文件。 工作过程sed 的工作流程包括以下三个主要步骤：  读取：sed 从输入流（文件、管道、标准输入）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-04T14:05:20.000Z">
+<meta property="article:modified_time" content="2025-07-04T14:09:53.589Z">
+<meta property="article:author" content="Nier Demon">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>shell编程之sed文本编辑 - Nier Demon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"nicem126.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Nier Demon</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.niestar.tech/pics/test.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="shell编程之sed文本编辑"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-04 22:05" pubdate>
+          2025年7月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">shell编程之sed文本编辑</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="sed-编辑器"><a href="#sed-编辑器" class="headerlink" title="sed 编辑器"></a>sed 编辑器</h2><p><code>sed</code> 是一种流编辑器（Stream Editor），用于对文本文件进行行级别的处理。与 <code>vim</code> 不同，<code>sed</code> 处理时不直接编辑文件，而是将文件的每一行读取到临时缓冲区中（称为“模式空间”或 pattern space），在该缓冲区中执行编辑命令，最后将处理结果输出到屏幕或指定的文件。</p>
+<h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><p><code>sed</code> 的工作流程包括以下三个主要步骤：</p>
+<ol>
+<li><strong>读取</strong>：<code>sed</code> 从输入流（文件、管道、标准输入）中读取一行内容并存储到临时缓冲区（模式空间）中。</li>
+<li><strong>执行</strong>：<code>sed</code> 在模式空间中执行指定的命令，对内容进行相应处理。默认情况下，所有 <code>sed</code> 命令都会顺序执行，除非指定了行的地址范围。</li>
+<li><strong>显示</strong>：将修改后的内容输出到标准输出或指定的文件。在输出之后，模式空间被清空并重复上述过程，直至所有输入内容处理完毕。</li>
+</ol>
+<p><strong>注意</strong>：默认情况下，sed 不会修改源文件内容，除非使用 -i 选项直接编辑文件或使用重定向将输出保存到新文件中。</p>
+<h3 id="提高-sed-执行效率的方法"><a href="#提高-sed-执行效率的方法" class="headerlink" title="提高 sed 执行效率的方法"></a>提高 sed 执行效率的方法</h3><p>在处理大容量文件时，<code>sed</code> 的执行速度可能会变慢。优化方案：</p>
+<ul>
+<li><p><strong>方案一</strong>（推荐使用）：使用 <code>split</code> 命令将大文件按行数或大小进行拆分，然后对拆分后的文件分别执行 <code>sed</code> 操作。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 将一个百万行的文件拆分为每个文件10000行的小文件</span><br><span class="hljs-built_in">split</span> -l 10000 largefile.txt smallfile_<br><br><span class="hljs-comment"># 按行分割</span><br><span class="hljs-comment"># 用行开分割更直观，推荐工作中使用</span><br><span class="hljs-built_in">split</span> -l -30 test1.txt  se <br><br><span class="hljs-comment"># 按大小分割</span><br><span class="hljs-built_in">split</span> -b 400M test1.txt se <br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方案二</strong>：使用 <code>cat 文件名 | sed 处理命令</code> 的方式处理文件。这种方法适用于中大型文件，但对于非常大的文件效果不佳。</p>
+</li>
+</ul>
+<h3 id="sed-命令格式与选项"><a href="#sed-命令格式与选项" class="headerlink" title="sed 命令格式与选项"></a>sed 命令格式与选项</h3><p><strong>格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;/匹配模式/命令 参数&#x27;</span> 文件名<br></code></pre></td></tr></table></figure>
+
+<p><strong>基本操作格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -e <span class="hljs-string">&#x27;操作&#x27;</span> 文件1 [文件2]<br><span class="hljs-comment"># 使用 -e 选项指定编辑操作</span><br><br>sed -f 脚本文件 文件1 [文件2]<br><span class="hljs-comment"># 使用 -f 选项从脚本文件读取操作</span><br><br>sed -i -e <span class="hljs-string">&#x27;操作&#x27;</span> 文件 [文件2] <br><span class="hljs-comment"># 直接编辑文件（慎用）</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>执行多条命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">方式一：<br>sed -e <span class="hljs-string">&#x27;操作1&#x27;</span> -e <span class="hljs-string">&#x27;操作2&#x27;</span> 文件<br><br><span class="hljs-comment"># 例如</span><br>sed -n -e <span class="hljs-string">&#x27;/^r/p&#x27;</span>  -e <span class="hljs-string">&#x27;/^b/p&#x27;</span> /etc/passwd <br><br>方式二：<br>sed -e <span class="hljs-string">&#x27;操作1;操作2&#x27;</span> 文件<br></code></pre></td></tr></table></figure>
+
+<p><strong>常用选项</strong></p>
+<ul>
+<li><strong>-e</strong> 或 <code>--expression=</code>：指定处理输入文件的 sed 命令。只有一个操作命令时可省略，一般在执行多个操作命令使用。</li>
+<li><strong>-f</strong> 或 <code>--file=</code>：使用指定的脚本文件读取 sed 命令。</li>
+<li><strong>-h</strong> 或 <code>--help</code>：显示帮助信息。</li>
+<li><strong>-i</strong> ：直接修改目标文件（慎用）。(in-place)</li>
+<li><strong>-n</strong>：禁止默认输出，仅显示 sed 处理后的结果，通常与p命令结合使用。</li>
+<li><strong>-r</strong> ：支持扩展正则表达式。（-E也可以，主要在BSD系统。）</li>
+</ul>
+<p><strong>常用操作符（也叫命令）</strong></p>
+<ul>
+<li><code>s</code>：替换，替换指定字符。</li>
+<li><code>d</code>：删除，删除指定的行。</li>
+<li><code>a</code>：增加，在当前行之后添加一行。</li>
+<li><code>i</code>：插入，在当前行之前插入一行。</li>
+<li><code>c</code>：替换，将选定行替换指定的行。</li>
+<li><code>y</code>：字符替换，转换前后的字符长度必须相同。</li>
+<li><code>p</code>：打印行。如果同时指定行，表示打印指定行；如果不指定行，则表示打印所有内容；如果有非打印字符，则以 ASCII 码输出。通常与“-n”选项一起使用。</li>
+<li><code>=</code>：打印行号。</li>
+<li><code>l</code>：打印文本行，显示不可打印的 ASCII 字符（比如结束符$、制表符\t）</li>
+<li><code>r</code>：从另一个文件中读取内容并插入到指定行之后。</li>
+</ul>
+<p><strong>分隔符 &#x2F; 格式说明</strong></p>
+<p>在 <code>sed</code> 命令的语法规则中，正则表达式通常用正斜杠 <code>/</code> 来分隔，用于将模式和命令分隔开来。</p>
+<ol>
+<li><p><strong>语法结构</strong>：<code>sed</code> 命令的基本格式是 <code>sed &#39;s/pattern/replacement/&#39;</code> 或者类似的形式，如 <code>sed &#39;/pattern/command&#39;</code>。其中，<code>/</code> 用来分隔正则表达式（模式）和命令部分。例如：</p>
+<ul>
+<li><code>/pattern/</code> 用于定义一个正则表达式的匹配模式。</li>
+<li><code>s/pattern/replacement/</code> 用于替换模式匹配到的内容。</li>
+</ul>
+</li>
+<li><p><strong>可以更换分隔符</strong>：实际上 <code>/</code> 并不是唯一的，可使用其他字符作为分隔符，只要在整个命令中保持一致。例如，<code>#</code> 可以用作分隔符，适合用于匹配带有斜杠的路径的情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;\\#^/usr/local#d&#x27;</span> file.txt<br><span class="hljs-comment"># # 用于替代 / 作为分隔符。</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="地址定界"><a href="#地址定界" class="headerlink" title="地址定界"></a>地址定界</h3><p><code>sed</code> 命令中的地址定界（addressing）用于指定在哪些行上应用给定的操作。地址定界可以是具体的行号、行范围或匹配模式。<code>sed</code> 根据这些地址定界确定在哪些行上执行操作。</p>
+<p><strong>地址定界的类型</strong></p>
+<ol>
+<li><strong>行号</strong>：指定特定的行。<ul>
+<li>示例：<code>sed &#39;2d&#39; file.txt</code> 删除第2行。</li>
+</ul>
+</li>
+<li><strong>行范围</strong>：指定一个行的范围（从某一行到另一行）。<ul>
+<li>示例：<code>sed &#39;2,4d&#39; file.txt</code> 删除从第2行到第4行的所有行。</li>
+</ul>
+</li>
+<li><strong>匹配模式</strong>：基于内容匹配来指定行。<ul>
+<li>示例：<code>sed &#39;/pattern/d&#39; file.txt</code> 删除包含 “pattern” 的所有行。</li>
+</ul>
+</li>
+<li><strong>地址和操作的组合</strong>：将操作应用于匹配模式和&#x2F;或特定行号的组合。<ul>
+<li>示例：<code>sed &#39;1,3s/foo/bar/&#39; file.txt</code> 将第1行到第3行中所有的 “foo” 替换为 “bar”。</li>
+</ul>
+</li>
+</ol>
+<h3 id="sed-的核心功能"><a href="#sed-的核心功能" class="headerlink" title="sed 的核心功能"></a>sed 的核心功能</h3><p><code>sed</code> 具有增（增加）、删（删除）、改（替换）、查（打印）四大核心功能。</p>
+<h4 id="打印功能（-p-l-命令）"><a href="#打印功能（-p-l-命令）" class="headerlink" title="打印功能（ p , &#x3D; , l 命令）"></a>打印功能（ p , &#x3D; , l 命令）</h4><p><code>sed</code> 命令可以用来查看文件内容，支持重定向输入和管道符的使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;&#x27;</span> /etc/fstab     <span class="hljs-comment"># 查看文件内容</span><br>sed <span class="hljs-string">&#x27;&#x27;</span> &lt; /etc/fstab   <span class="hljs-comment"># 使用重定向输入查看文件内容</span><br><span class="hljs-built_in">cat</span> /etc/passwd | sed <span class="hljs-string">&#x27;&#x27;</span>  <span class="hljs-comment"># 使用管道符查看文件内容</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<ol>
+<li><p><strong>默认打印方式</strong></p>
+<p><code>sed</code> 默认会输出所有内容，使用 <code>-n</code> 选项可以禁止默认输出，配合 <code>p</code> 选项打印指定的行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -e <span class="hljs-string">&#x27;p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 默认输出加上&#x27;p&#x27;会打印两行</span><br><br>sed -n <span class="hljs-string">&#x27;p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 使用&#x27;-n&#x27;禁止默认输出，只打印一行</span><br><br>sed -n <span class="hljs-string">&#x27;2p&#x27;</span> test1.txt <br><span class="hljs-comment"># 打印第二行</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>打印行号和内容</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;=&#x27;</span> test1.txt     <span class="hljs-comment"># 只显示行号</span><br>sed -n <span class="hljs-string">&#x27;=;p&#x27;</span> test1.txt   <span class="hljs-comment"># 显示行号和每行的内容</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>寻址打印</strong></p>
+</li>
+</ol>
+<ul>
+<li><p><strong>方式一：按照行号打印</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;1p&#x27;</span> test1.txt   <span class="hljs-comment"># 打印第一行</span><br>sed -n <span class="hljs-string">&#x27;4p&#x27;</span> test1.txt   <span class="hljs-comment"># 打印第四行</span><br>sed -n <span class="hljs-string">&#x27;$p&#x27;</span> test1.txt   <span class="hljs-comment"># 打印最后一行</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方式二：打印行号范围区间</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;1,3p&#x27;</span> test1.txt   <br><span class="hljs-comment"># 打印1-3行</span><br><br>sed -n <span class="hljs-string">&#x27;5,$p&#x27;</span> test1.txt <br><span class="hljs-comment"># 打印第五行到最后一行</span><br><br>sed -n <span class="hljs-string">&#x27;2,+2p&#x27;</span> test1.txt<br><span class="hljs-comment"># 打印第二行和之后的两行，相当于 2,4p</span><br><br>sed -n <span class="hljs-string">&#x27;3p;5p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 打印第三行和第五行</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方式三：指定间隔打印</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n -e <span class="hljs-string">&#x27;2p&#x27;</span> -e<span class="hljs-string">&#x27;$p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 打印第二行和最后一行</span><br><br>sed -n -e <span class="hljs-string">&#x27;2p&#x27;</span> -e<span class="hljs-string">&#x27;3p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 打印第二行和第三行 </span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方式四：打印奇数行和偶数行</strong></p>
+<p>n 在 p 前面，跳过一行，打印下一行，就是偶数行</p>
+<p>n 在 p 后面，就是打印第一行，然后跳过一行，形成奇数行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;n;p&#x27;</span> test1.txt   <span class="hljs-comment"># 打印偶数行</span><br>sed -n <span class="hljs-string">&#x27;p;n&#x27;</span> test1.txt   <span class="hljs-comment"># 打印奇数行</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><strong>文本模式过滤行内容打印</strong></li>
+</ol>
+<ul>
+<li><p><strong>方式一：对包含字符串的行进行过滤打印</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;/o/p&#x27;</span> test1.txt   <br><span class="hljs-comment"># 打印包含 &#x27;o&#x27; 的所有行</span><br><br>sed -n <span class="hljs-string">&#x27;/th/p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 打印包含 &#x27;th&#x27; 的所有行</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方式二：应用基础正则表达式进行打印</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;/^root/p&#x27;</span> /etc/passwd   <br><span class="hljs-comment"># 打印以 &#x27;root&#x27; 开头的所有行</span><br><br>sed -n <span class="hljs-string">&#x27;/bash$/p&#x27;</span> /etc/passwd   <br><span class="hljs-comment"># 打印以 &#x27;bash&#x27; 结尾的所有行</span><br><br>sed -n <span class="hljs-string">&#x27;4,/bash$/p&#x27;</span> /etc/passwd  <br><span class="hljs-comment"># 从第四行开始，一直打印到第一个以bash为结尾的所在行</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>方式三：应用扩展正则表达式进行打印</strong></p>
+<p><strong>注意</strong>： <code>sed -r</code> 支持扩展正则表达式。同时在使用 <code>&#123;n&#125;</code>、 <code>&#123;n,&#125;</code>、 <code>&#123;n,m&#125;</code> 时，括号 <code>&#123;&#125;</code>前不需要加反斜杠 <code>\</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -r -n <span class="hljs-string">&#x27;/(99:)&#123;2,&#125;/p&#x27;</span> /etc/passwd     <br><span class="hljs-comment"># 打印包含有两个 &#x27;99:&#x27; 的行</span><br><br>sed -r -n <span class="hljs-string">&#x27;/^root|bash$/p&#x27;</span> /etc/passwd   <br><span class="hljs-comment"># 打印以 &#x27;root&#x27; 开头或以 &#x27;bash&#x27; 结尾的行</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除操作（-d-命令）"><a href="#删除操作（-d-命令）" class="headerlink" title="删除操作（ d 命令）"></a>删除操作（ d 命令）</h4><p>注意：<code>sed -i</code> 时会对文本进行实际操作，建议对目标文件先进行备份，再进行操作。</p>
+<p><strong>示例</strong></p>
+<ol>
+<li><p><strong>通过行号进行删除</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;d&#x27;</span> test1.txt          <br><span class="hljs-comment"># 删除所有行，什么也不打印</span><br><br>sed -n <span class="hljs-string">&#x27;3d;p&#x27;</span> test1.txt    <br><span class="hljs-comment"># 删除第三行，打印剩余内容</span><br><br>sed -n <span class="hljs-string">&#x27;5,8d;p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 删除5到8行，打印剩余内容</span><br><br>sed -n <span class="hljs-string">&#x27;5,$d;p&#x27;</span> test1.txt  <br><span class="hljs-comment"># 删除5到最后一行，打印剩余内容</span><br><br>sed <span class="hljs-string">&#x27;4,6!d&#x27;</span> test1.txt<br><span class="hljs-comment"># 除了4-6行，其他的全部删除</span><br><span class="hljs-comment"># 如果要生效：sed -i -n </span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>匹配字符串内容删除</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;/one/d&#x27;</span> test1.txt          <br><span class="hljs-comment"># 删除包含 &#x27;one&#x27; 的行</span><br><br>sed <span class="hljs-string">&#x27;/one/,/six/d&#x27;</span> test1.txt    <br><span class="hljs-comment"># 删除 &#x27;one&#x27; 到 &#x27;six&#x27; 之间的行</span><br><br>sed <span class="hljs-string">&#x27;/one/,/six/!d&#x27;</span> test1.txt<br><span class="hljs-comment"># 反向删除，除了one-six的行，其余的全部删除</span><br><br>sed <span class="hljs-string">&#x27;/six/!d&#x27;</span> test1.txt <br><span class="hljs-comment"># 反向删除，除了six的行，其余的全部删除</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>字符串搭配正则进行删除</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;/^$/d&#x27;</span> test1.txt<br><span class="hljs-comment"># 通过^$，来删除空行；</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除空行</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 方法一：</span><br>grep -v <span class="hljs-string">&quot;^$&quot;</span> test1.txt     <span class="hljs-comment"># 过滤出非空行</span><br><span class="hljs-comment"># 方法二：</span><br><span class="hljs-built_in">cat</span> test1.txt |<span class="hljs-built_in">tr</span> -s <span class="hljs-string">&quot;\n&quot;</span>  <span class="hljs-comment"># 压缩换行符</span><br><span class="hljs-comment"># 方法三：</span><br>sed <span class="hljs-string">&#x27;/^$/d&#x27;</span> test1.txt      <span class="hljs-comment"># 删除空行</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="替换操作（-s-c-y-命令）"><a href="#替换操作（-s-c-y-命令）" class="headerlink" title="替换操作（ s , c , y 命令）"></a>替换操作（ s , c , y 命令）</h4><p><strong>格式</strong></p>
+<p><code>sed</code> 使用 <code>s</code> 操作符进行替换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">行范围 s/旧字符串/新字符串/替换标记 <br></code></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;s/旧字符串/新字符串/&#x27;</span> test1.txt   <br><span class="hljs-comment"># 替换第一处匹配</span><br><br>sed <span class="hljs-string">&#x27;s/旧字符串/新字符串/g&#x27;</span> test1.txt  <br><span class="hljs-comment"># 替换所有匹配</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>替换标记和替换命令：</strong></p>
+<ul>
+<li><p><strong>替换标记（Flags）</strong></p>
+<p>在 <code>sed</code> 的替换操作（<code>s</code> 命令）中使用的是替换标记（flags）。这些标记用来指定替换的行为，通常放在 <code>s/old/new/</code> 之后。</p>
+</li>
+<li><p><strong>替换命令（Commands）</strong><br>用于不同的替换操作，指定替换操作的类型。它们是 <code>sed</code> 的主要操作指令，通常紧跟在分隔符 <code>/</code> 后面。</p>
+</li>
+</ul>
+<p><strong>常用替换标记</strong></p>
+<ul>
+<li><code>数字</code>：新字符串替换第几处匹配。</li>
+<li><code>g</code>：新字符串替换所有匹配。(global)</li>
+<li><code>p</code>：打印替换后的行。与“-n”一起使用。</li>
+<li><code>w 文件</code>：将替换结果写入文件。</li>
+</ul>
+<p><strong>常用替换命令</strong></p>
+<ul>
+<li><code>s</code>：替换字符串。(substitute)</li>
+<li><code>c</code>：整行替换。</li>
+<li><code>y</code>：字符替换，替换前后的字符串长度必须相同。</li>
+</ul>
+<p><strong>特殊转换符号</strong></p>
+<ul>
+<li>**<code>\l</code>**：将紧随其后的字母转换为小写。<ul>
+<li>例：<code>sed &#39;s/[A-Z]/\l&amp;/g&#39; file.txt</code> 将所有大写字母转换为小写字母。</li>
+</ul>
+</li>
+<li>**<code>\u</code>**：将紧随其后的字母转换为大写。<ul>
+<li>例：<code>sed &#39;s/[a-z]/\u&amp;/&#39; file.txt</code> 将匹配的第一个小写字母转换为大写字母（仅对每个替换的第一个匹配字符有效）。</li>
+</ul>
+</li>
+<li>**<code>\L</code>**：将紧随其后的所有字母转换为小写。<ul>
+<li>例：<code>sed &#39;s/[a-z]/\L&amp;/g&#39; file.txt</code> 将所有匹配的字母转换为小写字母。</li>
+</ul>
+</li>
+<li>**<code>\U</code>**：将紧随其后的所有字母转换为大写。<ul>
+<li>例：<code>sed &#39;s/[a-z]/\U&amp;/g&#39; file.txt</code> 将所有匹配的字母转换为大写字母。</li>
+</ul>
+</li>
+</ul>
+<p><strong>其他操作符号</strong></p>
+<ul>
+<li><strong><code>&amp;</code></strong> ：在替换操作中匹配的整个模式。因此，它可以用来引用正则表达式匹配到的内容。</li>
+<li><strong><code>|</code></strong> ：在扩展正则表达式中表示或操作。</li>
+</ul>
+<p><strong>示例</strong></p>
+<ol>
+<li><p><strong>直接替换字符串（ s 命令）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -n <span class="hljs-string">&#x27;s/root/test/2p&#x27;</span> /etc/passwd  <br><span class="hljs-comment"># 指定第二个 &quot;root&quot;，替换为 &quot;test&quot;</span><br><br>sed -n <span class="hljs-string">&#x27;s/root/test/gp&#x27;</span> /etc/passwd  <br><span class="hljs-comment"># 所有的 &quot;root&quot; 都替换为 &quot;test&quot;</span><br><br>sed -n <span class="hljs-string">&#x27;/^root/ s/^/#/p&#x27;</span> /etc/passwd  <br><span class="hljs-comment"># 以&quot;root&quot;开头的行，替换开头为空的字符为&quot;#&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>将文件中“&#x2F;var&#x2F;www&#x2F;”的内容替换为“&#x2F;etc&#x2F;”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&quot;s/\/var\/www/\/etc/&quot;</span> httpd.conf<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>字母字符大小写转换</strong></p>
+<p><code>sed</code> 可以用于转换字母的大小写：</p>
+<p><strong>将大写字母转换为小写：</strong></p>
+<p>“l&amp;” 是转换小写的特殊符号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;s/[A-Z]/\l&amp;/g&#x27;</span> test1.txt  <br><span class="hljs-comment"># 将所有大写字母转换为小写，</span><br><span class="hljs-comment"># &quot;l&amp;&quot; 是转换小写的特殊符号，需加转义符 &quot;\&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>将首字母转换为大写：</strong></p>
+<p>“u&amp;” 是转换首字母大写的特殊符号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;s/[a-z]/\u&amp;/&#x27;</span> test1.txt  <br><span class="hljs-comment"># 将首字母替换为大写，</span><br><span class="hljs-comment"># &quot;u&amp;&quot; 是转换首字母大写的特殊符号，需加转义符 &quot;\&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>将所有小写字母转换为大写：</strong></p>
+<p>末尾加上 “g”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;s/[a-z]/\\U&amp;/g&#x27;</span> test1.txt  <br><span class="hljs-comment"># 末尾加上 &quot;g&quot;，表示全部转换成大写</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>字符串和字符位置交换</strong></p>
+<p>通过正则表达式的分组和引用，<code>sed</code> 可以轻松实现字符串或字符位置的交换。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> ky29ztt | sed -r <span class="hljs-string">&#x27;s/(ky29)(ztt)/\2\1/&#x27;</span>  <br><span class="hljs-comment"># 输出：zttky29</span><br><br><span class="hljs-built_in">echo</span> ky27yhtdxl | sed -r <span class="hljs-string">&#x27;s/(ky27)(yht)(dxl)/\3\2\1/&#x27;</span><br><span class="hljs-comment"># 输出：dxlyhtky27</span><br><br><span class="hljs-built_in">echo</span> ky27yhtdxl | sed -r <span class="hljs-string">&#x27;s/(ky27)(yht)(dxl)/\3\2/&#x27;</span><br><span class="hljs-comment"># 输出：dxlyht</span><br><br><span class="hljs-built_in">echo</span> 123abc | sed -r <span class="hljs-string">&#x27;s/(.)(.)(.)(.)(.)(.)/\6\5\4\3\2\1/&#x27;</span>  <br><span class="hljs-comment"># 输出：cba321</span><br><br><span class="hljs-built_in">echo</span> 小明明真的帅 | sed -r <span class="hljs-string">&#x27;s/(.)(.)(.)(.)(.)(.)/\6\5\4\3\2\1/&#x27;</span>  <br><span class="hljs-comment"># 输出：帅的真明明小</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>整行替换（ c 命令）</strong></p>
+<p>使用 <code>c</code> 命令可以替换整行的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;/ONE/c 22&#x27;</span> test1.txt  <br><span class="hljs-comment"># 将包含 &quot;ONE&quot; 的行替换为 &quot;22&quot;</span><br><br>sed <span class="hljs-string">&#x27;/TWO/c TEST&#x27;</span> test1.txt  <br><span class="hljs-comment"># 将包含 &quot;TWO&quot; 的行替换为 &quot;TEST&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>单字符替换（ y 命令）</strong></p>
+<p>使用 <code>y</code> 命令对单个字符进行替换，每个字符需要一一对应，不是整体替换。只要有匹配的单字符会全部替换。</p>
+<p><strong>注意</strong>：前后字符串长度需要一致，否则会报错。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;y/TH/12/&#x27;</span> test1.txt  <br><span class="hljs-comment"># 将 &quot;T&quot; 替换为 &quot;1&quot;，&quot;H&quot; 替换为 &quot;2&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="增加功能（-a-i-r-命令）"><a href="#增加功能（-a-i-r-命令）" class="headerlink" title="增加功能（ a , i , r 命令）"></a>增加功能（ a , i , r 命令）</h4><p><code>sed</code> 支持在指定行后或前增加内容，或从文件中读取内容插入。</p>
+<p><strong>常用增加命令</strong></p>
+<ul>
+<li>**<code>a</code>**：在下一行添加内容，在指定的匹配行之后插入内容。(append)</li>
+<li>**<code>i</code>**：在上一行插入内容，在指定的匹配行之前插入内容。(insert)</li>
+<li>**<code>r</code>**：在行后读入文件内容，从文件中读取内容并插入到指定的匹配行之后。(read)</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">###用法一：</span><br>sed <span class="hljs-string">&#x27;/three/a 123&#x27;</span> test1.txt  <br><span class="hljs-comment"># 在包含 &quot;three&quot; 的行后插入 &quot;123&quot;</span><br><br>sed <span class="hljs-string">&#x27;/three/i 123&#x27;</span> test1.txt  <br><span class="hljs-comment"># 在包含 &quot;three&quot; 的行前插入 &quot;123&quot;</span><br><br>sed <span class="hljs-string">&#x27;/three/r test.sh&#x27;</span> 123.txt  <br><span class="hljs-comment"># 在包含 &quot;three&quot; 的行后插入 &quot;test.sh&quot; 文件内容</span><br><br><span class="hljs-comment">###用法二：使用$符号匹配</span><br>sed <span class="hljs-string">&#x27;$r test2.txt&#x27;</span> test1.txt  <br><span class="hljs-comment"># 在 test1.txt 最后一行后插入 test2.txt 文件的内容</span><br><span class="hljs-comment"># $-匹配最后一行，r-读取再插入</span><br><br>sed <span class="hljs-string">&#x27;$a 123&#x27;</span> 123.txt  <br><span class="hljs-comment"># 在 `123.txt` 最后一行插入 &quot;123&quot;，a-下一行</span><br><br>sed <span class="hljs-string">&#x27;$i 123&#x27;</span> 123.txt  <br><span class="hljs-comment"># 在 `123.txt` 倒数第二行后插入 &quot;123&quot;，i-上一行</span><br><br>sed <span class="hljs-string">&#x27;s/$/ EOF/&#x27;</span> 123.txt<br><span class="hljs-comment"># 使用替换，在每一行末尾添加 &quot;EOF&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="使用-f-指定命令文件-读取规则"><a href="#使用-f-指定命令文件-读取规则" class="headerlink" title="使用 -f 指定命令文件(读取规则)"></a>使用 -f 指定命令文件(读取规则)</h3><p><code>sed</code> 可以通过 <code>-f</code> 参数指定命令文件来处理另一个文件。</p>
+<p><strong>示例1</strong>：</p>
+<p>读取 <code>123.txt</code> 的替换规则应用到 <code>456.txt</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> 123.txt<br>/IPADDR=192.168.233.21/c IPADDR=10.10.10.10<br><br><span class="hljs-built_in">cat</span> 456.txt<br>IPADDR=192.168.233.21<br><br>sed -f 123.txt 456.txt  <br><span class="hljs-comment"># 使用 123.txt 的命令处理 456.txt</span><br><span class="hljs-comment"># 结果将 IP 地址替换为 &quot;10.10.10.10&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例2</strong>：</p>
+<p>使用 <code>-f</code> 选项从文件 <code>test27.txt</code> 中读取替换规则，并将这些规则应用到 <code>test27sed.txt</code> 文件的内容上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> test27.txt <br>s/ /_/g<br><br><span class="hljs-built_in">cat</span> test27sed.txt <br>hello world<br>aaa bbb<br><br>sed -f test27.txt test27sed.txt<br>hello_world<br>aaa_bbb<br><span class="hljs-comment"># s/ /_/g：用下划线（_）替换所有的空格（ ）。</span><br><span class="hljs-comment"># / /：匹配空格</span><br><span class="hljs-comment"># g：全局替换</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>本文转载自<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44421043/article/details/142034692?spm=1001.2014.3001.5502">CSDN</a>，如有侵权，联系删除。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Shell/" class="category-chain-item">Shell</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>shell编程之sed文本编辑</div>
+      <div>https://nicem126.github.io/2025/07/04/shell编程之sed文本编辑/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Nier Demon</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/04/shell%E7%BC%96%E7%A8%8B%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="shell编程之正则表达式">
+                        <span class="hidden-mobile">shell编程之正则表达式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
